@@ -1,0 +1,86 @@
+{% extends "tracker/base.html" %}
+{% block title %}Welcome - PennyPilot{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="text-center py-5">
+    <h1 class="display-3 mb-3">Welcome to PennyPilot</h1>
+    <p class="lead mb-4">Your trusted finance buddy to track expenses, manage budgets, and save smarter.</p>
+</section>
+
+<!-- Features Section -->
+<section class="container py-5">
+    <div class="row text-center">
+        <div class="col-md-4 mb-4">
+            <div class="p-4 border rounded shadow-sm h-100">
+                <h3 class="mb-3">💸 Easy Expense Tracking</h3>
+                <p>Quickly add daily expenses with a simple and intuitive interface. Keep your spending in check.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="p-4 border rounded shadow-sm h-100">
+                <h3 class="mb-3">📊 Insights & Reports</h3>
+                <p>Visualize your spending habits with monthly reports and charts to help you budget better.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="p-4 border rounded shadow-sm h-100">
+                <h3 class="mb-3">🔒 Secure & Private</h3>
+                <p>Your data is safe with secure login and private user accounts. Manage your finances with confidence.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="container py-5">
+    <h2 class="mb-4 text-center">About PennyPilot</h2>
+    <p class="lead text-center mx-auto" style="max-width: 700px;">
+        PennyPilot is designed to help you take control of your finances effortlessly. Whether you're looking to monitor daily spending or create budgets for the future, our intuitive platform empowers you to make smarter financial decisions.
+    </p>
+</section>
+
+<!-- FAQ Section -->
+<section class="container py-5">
+    <h2 class="mb-4 text-center">Frequently Asked Questions</h2>
+    <div class="accordion" id="faqAccordion">
+        <div class="accordion-item">
+            <h3 class="accordion-header" id="faq1-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="false" aria-controls="faq1">
+                    Is PennyPilot free to use?
+                </button>
+            </h3>
+            <div id="faq1" class="accordion-collapse collapse" aria-labelledby="faq1-header" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Yes! PennyPilot offers a free tier that includes all basic features to help you get started managing your expenses.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h3 class="accordion-header" id="faq2-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                    Can I use PennyPilot on my phone?
+                </button>
+            </h3>
+            <div id="faq2" class="accordion-collapse collapse" aria-labelledby="faq2-header" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Absolutely! PennyPilot is fully responsive and works seamlessly on smartphones, tablets, and desktops.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h3 class="accordion-header" id="faq3-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                    How secure is my financial data?
+                </button>
+            </h3>
+            <div id="faq3" class="accordion-collapse collapse" aria-labelledby="faq3-header" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Security is our top priority. We use industry-standard encryption and secure authentication methods to protect your information.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

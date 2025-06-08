@@ -1,0 +1,141 @@
+{% extends "tracker/base.html" %} {% block title %}Add Expense{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow rounded-4 border-0">
+        <div
+          class="card-header bg-primary rounded-top-4 d-flex align-items-center px-4 py-3"
+        >
+          <i class="bi bi-pencil-square fs-3 me-3 text-white"></i>
+          <h4 class="mb-0 text-white">Add Expense</h4>
+        </div>
+
+        <div class="card-body p-4">
+          <form method="post" novalidate>
+            {% csrf_token %}
+
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                name="title"
+                id="title"
+                class="form-control"
+                placeholder="Expense Title"
+                required
+              />
+              <label for="title"
+                ><i class="bi bi-journal-text me-2"></i>Title</label
+              >
+            </div>
+
+            <div class="form-floating mb-3">
+              <input
+                type="number"
+                step="0.01"
+                name="amount"
+                id="amount"
+                class="form-control"
+                placeholder="Amount in ₹"
+                required
+              />
+              <label for="amount"
+                ><i class="bi bi-currency-rupee me-2"></i>Amount (₹)</label
+              >
+            </div>
+
+            <div class="form-floating mb-3">
+              <textarea
+                name="notes"
+                id="notes"
+                class="form-control"
+                placeholder="Optional notes"
+                style="height: 100px"
+              ></textarea>
+              <label for="notes"
+                ><i class="bi bi-pencil-square me-2"></i>Notes</label
+              >
+            </div>
+
+            <!-- Category select with new category input -->
+            <div class="form-floating mb-3">
+              <select
+                name="category"
+                id="category"
+                class="form-select"
+                onchange="toggleNewCategoryInput()"
+                required
+              >
+                <option value="" selected disabled>Select Category</option>
+                {% for cat in categories %}
+                <option value="{{ cat.id }}">{{ cat.category }}</option>
+                {% endfor %}
+                <option value="__new__">+ Add New Category</option>
+              </select>
+              <label for="category">
+                <i class="bi bi-list-task me-2"></i>Category
+              </label>
+            </div>
+
+            <div class="mb-3" id="new-category-wrapper" style="display: none">
+              <input
+                type="text"
+                name="new_category"
+                id="new-category-input"
+                class="form-control"
+                placeholder="New Category Name"
+                autocomplete="off"
+              />
+            </div>
+
+            <div class="form-floating mb-4">
+              <input
+                type="date"
+                name="paid_date"
+                id="paid_date"
+                class="form-control"
+                required
+              />
+              <label for="paid_date"
+                ><i class="bi bi-calendar-event me-2"></i>Payable Date</label
+              >
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-gradient w-100 py-2 fw-semibold shadow-sm"
+            >
+              <i class="bi bi-save2 me-2"></i>Save Expense
+            </button>
+            <a
+              href="{% url 'user_dashboard' %}"
+              class="btn w-100 py-2 my-3 fw-semibold shadow-sm text-dark"
+            >
+              <i class="bi bi-arrow-left-circle me-2"></i>Back to Dashboard
+            </a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleNewCategoryInput() {
+    const select = document.getElementById("category");
+    const newCategoryWrapper = document.getElementById("new-category-wrapper");
+    const newCategoryInput = document.getElementById("new-category-input");
+    if (select.value === "__new__") {
+      newCategoryWrapper.style.display = "block";
+      newCategoryInput.required = true;
+      select.required = false; // prevent conflict when adding new category
+    } else {
+      newCategoryWrapper.style.display = "none";
+      newCategoryInput.value = "";
+      newCategoryInput.required = false;
+      select.required = true;
+    }
+  }
+</script>
+
+{% endblock %}

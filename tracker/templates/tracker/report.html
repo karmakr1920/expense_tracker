@@ -1,0 +1,191 @@
+{% extends "tracker/base.html" %}
+{% block title %}Report{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <h2 class="mb-4 text-center">Expense Report</h2>
+
+  <!-- Filter Form -->
+  <form method="get" class="row g-3 mb-4 justify-content-center">
+    <div class="col-auto">
+      <label for="filter_type" class="form-label fw-semibold">Filter By</label>
+      <select class="form-select" id="filter_type" name="filter_type" required>
+        <option value="weekly" {% if filter_type == 'weekly' %}selected{% endif %}>Last 7 Days</option>
+        <option value="monthly" {% if filter_type == 'monthly' %}selected{% endif %}>Last 30 Days</option>
+        <option value="yearly" {% if filter_type == 'yearly' %}selected{% endif %}>This Year</option>
+        <option value="custom" {% if filter_type == 'custom' %}selected{% endif %}>Custom Range</option>
+      </select>
+    </div>
+
+    <div class="col-auto" id="customDateRange" style="display: {% if filter_type == 'custom' %}flex{% else %}none{% endif %}; gap: 1rem;">
+      <div>
+        <label for="start_date" class="form-label fw-semibold">Start Date</label>
+        <input type="date" class="form-control" id="start_date" name="start_date" value="{{ start_date }}">
+      </div>
+      <div>
+        <label for="end_date" class="form-label fw-semibold">End Date</label>
+        <input type="date" class="form-control" id="end_date" name="end_date" value="{{ end_date }}">
+      </div>
+    </div>
+
+    <div class="col-auto d-flex align-items-end">
+      <button type="submit" class="btn btn-primary">Apply Filter</button>
+    </div>
+  </form>
+
+
+  <!-- Summary Cards -->
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <div class="card shadow-sm border-0 text-center">
+        <div class="card-body">
+          <h5 class="card-title">Last 7 Days</h5>
+          <p class="display-6 text-primary">₹{{ weekly_total }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card shadow-sm border-0 text-center">
+        <div class="card-body">
+          <h5 class="card-title">Last 30 Days</h5>
+          <p class="display-6 text-success">₹{{ monthly_total }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts side by side -->
+<div class="row mb-4">
+  <!-- Pie Chart: Category -->
+  <div class="col-md-6">
+    {% if by_category %}
+    <div class="card shadow-sm border-0">
+      <div class="card-header bg-light fw-semibold">📌 Expenses by Category</div>
+      <div class="card-body">
+        <div class="chart-container" style="max-width: 100%; height: 300px;">
+          <canvas id="categoryChart"></canvas>
+        </div>
+      </div>
+    </div>
+    {% else %}
+      <div class="alert alert-info">No category data available for the selected period.</div>
+    {% endif %}
+  </div>
+
+  <!-- Line Chart: Daily -->
+  <div class="col-md-6">
+    {% if daily_series %}
+    <div class="card shadow-sm border-0">
+      <div class="card-header bg-light fw-semibold">📈 Daily Expense Trend</div>
+      <div class="card-body">
+        <div class="chart-container" style="position: relative; height: 300px;">
+          <canvas id="dailyChart"></canvas>
+        </div>
+      </div>
+    </div>
+    {% else %}
+      <div class="alert alert-warning">No expenses found for this filter.</div>
+    {% endif %}
+  </div>
+</div>
+
+
+  <!-- Recurring Expenses -->
+  <div class="card mb-4 shadow-sm border-0">
+    <div class="card-header bg-light fw-semibold">🔁 Recurring Expenses (Estimation)</div>
+    <ul class="list-group list-group-flush">
+      {% for r in recurring %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          {{ r.category__category }}
+          <span class="badge bg-warning text-dark">{{ r.count }} times</span>
+        </li>
+      {% empty %}
+        <li class="list-group-item">No recurring expenses detected.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  {% if daily_series %}
+  const labels = [
+    {% for item in daily_series %}
+      "{{ item.paid_date }}"{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ];
+  const dataValues = [
+    {% for item in daily_series %}
+      {{ item.total }}{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ];
+  new Chart(document.getElementById('dailyChart'), {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Daily Expenses',
+        data: dataValues,
+        fill: false,
+        borderColor: 'rgba(75, 192, 192, 1)',
+        tension: 0.4
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: false
+        }
+      }
+    }
+  });
+  {% endif %}
+
+  {% if by_category %}
+  const categoryLabels = [
+    {% for item in by_category %}
+      "{{ item.category__category }}"{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ];
+  const categoryData = [
+    {% for item in by_category %}
+      {{ item.total }}{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ];
+  new Chart(document.getElementById('categoryChart'), {
+    type: 'pie',
+    data: {
+      labels: categoryLabels,
+      datasets: [{
+        label: 'Expenses by Category',
+        data: categoryData,
+        backgroundColor: [
+          '#0d6efd', '#6f42c1', '#fd7e14', '#dc3545', '#198754', '#ffc107'
+        ],
+        borderColor: '#fff',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom'
+        }
+      }
+    }
+  });
+  {% endif %}
+  document.getElementById('filter_type').addEventListener('change', function () {
+  const customDateRange = document.getElementById('customDateRange');
+  if (this.value === 'custom') {
+    customDateRange.style.display = 'flex';
+  } else {
+    customDateRange.style.display = 'none';
+  }
+});
+
+</script>
+{% endblock %}

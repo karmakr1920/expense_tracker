@@ -1,0 +1,15 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+}
+
+section {
+    transition: all 0.3s ease-in-out;
+}
+
+h1, h4 {
+    color: #2c3e50;
+}
+
+footer {
+    font-size: 0.9rem;
+}
