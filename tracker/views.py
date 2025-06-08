@@ -5,10 +5,10 @@ from django.contrib import messages
 import calendar
 from django.utils.timezone import now, timedelta
 from datetime import datetime
-from django.utils.timezone import now
 from django.utils.dateparse import parse_date
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 
 def register_view(request):
@@ -20,11 +20,11 @@ def register_view(request):
 
         # Basic validation
         if password1 != password2:
-            messages.error(request, "Passwords do not match.")
+            messages.warning(request, "Passwords do not match.")
             return redirect('register')
 
         if User.objects.filter(username=username).exists():
-            messages.error(request, "Username already taken.")
+            messages.warning(request, "Username already taken.")
             return redirect('register')
 
         user = User.objects.create_user(username=username, email=email, password=password1)
@@ -76,11 +76,17 @@ def user_dashboard(request):
 
     remaining_budget = monthly_budget - total_expenses
 
+    # Paginate: 6 expenses per page
+    paginator = Paginator(expenses,3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {
-        'expenses': expenses,
+        # 'expenses': expenses,
         'total_expenses': round(total_expenses, 2),
         'monthly_budget': round(monthly_budget, 2),
         'remaining_budget': round(remaining_budget, 2),
+        'expenses': page_obj,  # Pass paginated expenses
+        'page_obj': page_obj,  # For pagination controls
     }
 
     return render(request, 'tracker/dashboard.html', context)
@@ -143,8 +149,8 @@ def update_expense(request, exp_id):
                 category=new_category_name.strip(),
                 user=request.user
             )
-            if created:
-                messages.success(request, f"New category '{new_category_name}' created.")
+            # if created:
+            #     messages.success(request, f"New category '{new_category_name}' created.")
         else:
             category_obj = Category.objects.filter(
                 category=category_name, user=request.user
@@ -202,7 +208,7 @@ def set_monthly_budget(request):
             if amount < 0:
                 raise ValueError("Budget cannot be negative")
         except ValueError:
-            messages.error(request, "Please enter a valid positive number for budget.")
+            messages.warning(request, "Please enter a valid positive number for budget.")
             return redirect('set_monthly_budget')
 
         budget.amount = amount
