@@ -26,9 +26,9 @@ LOGOUT_REDIRECT_URL = '/'  # after logout
 SECRET_KEY = 'django-insecure-3l_!850c)^4*522%io%+b+s0e%&6rj8d=cj1hs(5s(!-u&ctmb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['penny-pilot-cemm.onrender.com']
 
 
 # Application definition
