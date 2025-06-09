@@ -9,8 +9,9 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
-*.sqlite3
-db.sqlite3
+# Only ignore local/test DBs, not production if using SQLite
+*.local.sqlite3
+
 
 # Media and static files
 
