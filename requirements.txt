@@ -14,3 +14,4 @@ tzdata==2024.2
 urllib3==2.4.0
 uv==0.5.27
 yarg==0.1.10
+whitenoise>=6.6.0
