@@ -1,0 +1,331 @@
+/* PennyPilot Custom Styles - Vibrant Blue & Slate Theme */
+
+/* General Styles */
+body {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: all 0.3s ease;
+}
+.bg-light {
+  background: #f9fafb !important;
+}
+.bg-dark {
+  background: #1e293b !important;
+  color: #f3f4f6 !important;
+}
+
+/* Navbar */
+#navbar {
+  background: #f9fafb;
+  transition: all 0.3s ease;
+}
+.navbar.bg-dark {
+  background: #1e293b !important;
+}
+.navbar-brand {
+  font-size: 1.6rem;
+  color: #2563eb !important;
+  font-weight: 600;
+}
+.navbar-brand:hover {
+  color: #1e40af !important;
+}
+.nav-link {
+  font-weight: 500;
+  color: #1f2937 !important;
+}
+.nav-link:hover {
+  color: #2563eb !important;
+}
+.bg-dark .nav-link {
+  color: #f3f4f6 !important;
+}
+.bg-dark .nav-link:hover {
+  color: #2563eb !important;
+}
+.btn-primary {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+.btn-primary:hover {
+  background: #1e40af;
+  border-color: #1e40af;
+}
+.btn-outline-primary {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+.btn-outline-primary:hover {
+  background: #2563eb;
+  color: #f9fafb;
+}
+
+/* Hero Section (for index.html) */
+.bg-dark .hero-section{
+    background: #374151;
+}
+.hero-section {
+    border-radius: 15px;
+    margin: 2rem 1rem;
+    padding: 5rem 0;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+}
+.hero-section h1 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.hero-section p {
+  font-weight: 400;
+}
+.hero-section .btn-primary {
+  background: #f9fafb;
+  color: #2563eb;
+  border: none;
+  font-weight: 500;
+}
+.hero-section .btn-primary:hover {
+    background: #2563eb;
+    color: #fff;
+}
+
+/* Feature Cards (for index.html) */
+.feature-card {
+  border-radius: 15px;
+  /* background: #e5e7eb; */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.bg-dark .feature-card {
+  background: #374151;
+}
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+.feature-card i {
+  transition: transform 0.3s ease;
+}
+.feature-card:hover i {
+  transform: scale(1.1);
+}
+.feature-card h3 {
+  font-weight: 600;
+  color: #1f2937;
+}
+.bg-dark .feature-card h3 {
+  color: #f3f4f6;
+}
+.feature-card .text-muted {
+  font-weight: 400;
+  color: #6b7280 !important;
+}
+.bg-dark .feature-card .text-muted {
+  color: #9ca3af !important;
+}
+
+/* About Section (for index.html) */
+.about-section {
+    border-radius: 15px;
+    margin: 2rem 1rem;
+    padding: 4rem 0;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+}
+.bg-dark .about-section {
+  background: #374151;
+}
+
+.bg-dark .about_section h2 {
+  color: #f3f4f6;
+}
+.about-section .text-muted {
+  font-weight: 400;
+  color: #6b7280 !important;
+}
+.bg-dark .about-section .text-muted {
+  color: #9ca3af !important;
+}
+
+/* FAQ Section (for index.html) */
+.accordion-item {
+  border: none;
+  border-radius: 15px !important;
+  background: #e5e7eb;
+}
+.bg-dark .accordion-item {
+  background: #374151;
+}
+.accordion-button {
+  /* background: #e5e7eb; */
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.bg-dark .accordion-button {
+  background: #374151;
+  color: #2563eb;
+}
+.accordion-button:not(.collapsed) {
+  background: #d1d5db;
+  color: #1e40af;
+}
+.bg-dark .accordion-button:not(.collapsed) {
+  background: #4b5563;
+  color: #2563eb;
+}
+.accordion-body {
+  background: #e5e7eb;
+  font-weight: 400;
+  color: #1f2937;
+}
+.bg-dark .accordion-body {
+  background: #374151;
+  color: #f3f4f6;
+}
+
+/* Dashboard Summary Cards */
+.summary-card {
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.bg-dark .summary-card {
+  background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+}
+.summary-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+.summary-card h5 {
+  font-weight: 600;
+  color: #1f2937;
+}
+.bg-dark .summary-card h5 {
+  color: #f3f4f6;
+}
+.summary-card p, .summary-card i {
+  color: #1f2937;
+}
+.bg-dark .summary-card p, .bg-dark .summary-card i {
+  color: #f3f4f6;
+}
+
+/* Dashboard Expense Cards */
+.expense-card {
+  border-radius: 15px;
+  /* background: #e5e7eb; */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.bg-dark .expense-card {
+  background: #374151;
+}
+.expense-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+.expense-card h5 {
+  font-weight: 600;
+  color: #1f2937;
+}
+.bg-dark .expense-card h5 {
+  color: #f3f4f6;
+}
+.expense-card .text-muted {
+  color: #6b7280 !important;
+}
+.bg-dark .expense-card .text-muted {
+  color: #9ca3af !important;
+}
+.expense-card .badge {
+  background: #2563eb;
+  color: #f9fafb;
+}
+.expense-card .fs-5 {
+  color: #1f2937;
+}
+.bg-dark .expense-card .fs-5 {
+  color: #f3f4f6;
+}
+/* Pagination */
+.pagination .page-link {
+  background: #e5e7eb;
+  color: #2563eb;
+  border: none;
+  margin: 0 2px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.bg-dark .pagination .page-link {
+  background: #374151;
+  color: #f3f4f6;
+}
+.pagination .page-link:hover {
+  background: #2563eb;
+  color: #f9fafb;
+  transform: translateY(-2px);
+}
+.pagination .page-item.active .page-link {
+  background: #2563eb;
+  color: #f9fafb;
+}
+.pagination .page-item.disabled .page-link {
+  background: #d1d5db;
+  color: #6b7280;
+}
+.bg-dark .pagination .page-item.disabled .page-link {
+  background: #4b5563;
+  color: #9ca3af;
+}
+/* Modal */
+.modal-content {
+  border-radius: 15px;
+  background: #f9fafb;
+}
+.bg-dark .modal-content {
+  background: #374151;
+}
+.modal-header {
+  background: #2563eb;
+  color: #f9fafb;
+}
+.modal-body, .modal-footer {
+  color: #1f2937;
+}
+.bg-dark .modal-body, .bg-dark .modal-footer {
+  color: #f3f4f6;
+}
+.btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* Footer */
+#footer {
+  background: #2563eb;
+  color: #f9fafb;
+  transition: all 0.3s ease;
+}
+.bg-dark #footer {
+  background: #1e293b;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #e5e7eb;
+}
+::-webkit-scrollbar-thumb {
+  background: #2563eb;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1e40af;
+}
+.bg-dark ::-webkit-scrollbar-track {
+  background: #374151;
+}
+.bg-dark ::-webkit-scrollbar-thumb {
+  background: #2563eb;
+}
