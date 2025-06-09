@@ -13,8 +13,7 @@ __pycache__/
 db.sqlite3
 
 # Media and static files
-/media/
-/static/
+
 /staticfiles/
 
 # Migrations
