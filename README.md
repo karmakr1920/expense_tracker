@@ -107,3 +107,6 @@ MIT License. Feel free to fork and improve.
 ## 🙌 Contributions
 
 PRs are welcome! Feel free to file issues or feature requests.
+
+Feel Free to connect me on Linkedin
+https://www.linkedin.com/in/navin-kumar-550377223/
